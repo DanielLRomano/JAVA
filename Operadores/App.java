@@ -5,7 +5,8 @@ package Java.Operadores;
  */
 public class App {
     public static void main(String[] args) {
-        Operacoes operador = new Operacoes();
-        operador.aritimetica();
+        Operacoes objeto1 = new Operacoes();
+        objeto1.aritimetica();
+        objeto1.atribuicao();
     }
 }
