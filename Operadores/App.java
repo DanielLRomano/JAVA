@@ -8,5 +8,7 @@ public class App {
         Operacoes objeto1 = new Operacoes();
         objeto1.aritimetica();
         objeto1.atribuicao();
+        objeto1.relacionais();
+        objeto1.logicos();
     }
 }
