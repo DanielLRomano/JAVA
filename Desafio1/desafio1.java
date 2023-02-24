@@ -22,6 +22,5 @@ public class desafio1 {
         boolean aprovado = media >= 50 && frequencia >= 75;
 
         System.out.println("O aluno foi aprovado: " + aprovado);      
-    }
-    
+    } 
 }
