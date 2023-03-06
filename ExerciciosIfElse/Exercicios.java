@@ -234,7 +234,6 @@ public class Exercicios {
             System.out.println("Total de descontos: " + descontos);
             double salarioLiquido = salario - sindicato - inss;
             System.out.println("Salario Liquido: R$ " + salarioLiquido);
-
         } else if (salario >= 901 && salario <= 1500) {
             double ir = (salario * 5) / 100;
             double descontos = sindicato + inss + ir;
@@ -247,7 +246,6 @@ public class Exercicios {
             System.out.println("FGTS (11%): " + fgts);
             System.out.println("Total de descontos: " + descontos);
             System.out.println("Salario Liquido: R$ " + salarioLiquido);
-
         } else if (salario >= 1501 && salario <= 2500) {
             double ir = (salario * 10) / 100;
             double descontos = sindicato + inss + ir;
@@ -260,7 +258,6 @@ public class Exercicios {
             System.out.println("FGTS (11%): " + fgts);
             System.out.println("Total de descontos: " + descontos);
             System.out.println("Salario Liquido: R$ " + salarioLiquido);
-
         } else {
             double ir = (salario * 20) / 100;
             double descontos = sindicato + inss + ir;
