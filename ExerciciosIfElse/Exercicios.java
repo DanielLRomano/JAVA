@@ -135,4 +135,144 @@ public class Exercicios {
             System.out.println("O aluno foi reprovado.");
         }
     }
+
+    public void Exercicio8() {
+
+        System.out.println("Digite um numero inteiro: ");
+        int numero = sc.nextInt();
+
+        if (numero % 2 == 0) {
+            System.out.println("O numero digitado é par.");
+        } else {
+            System.out.println("O numero digitado é impar.");
+        }
+    }
+
+    public void Exercicio9() {
+
+        System.out.println("Informe sua nota: ");
+        int nota = sc.nextInt();
+
+        if (nota >= 7) {
+            System.out.println("Aprovado.");
+        } else if (nota >= 5 && nota < 7) {
+            System.out.println("Tem direito a fazer prova de recuperação.");
+        } else {
+            System.out.println("Reprovado.");
+        }
+    }
+
+    public void Exercicio10() {
+
+        System.out.println("Digite uma letra: ");
+        char letra = sc.next().charAt(0);
+
+        if (letra == 'a' || letra == 'e' || letra == 'i' || letra == 'o' || letra == 'u') {
+            System.out.println("A letra é uma vogal.");
+        } else {
+            System.out.println("A letra é uma consoante.");
+        }
+    }
+
+    public void Exercicio11() {
+
+        System.out.println("Informe seu salario: ");
+        double salario = sc.nextDouble();
+
+        if (salario <= 1280) {
+            double aumento = (salario * 20) / 100;
+            double salarioAumento = salario + aumento;
+            System.out.println("Salario antes do reajuste: " + salario);
+            System.out.println("Foi aplicado 20% de aumento.");
+            System.out.println("O valor do aumento foi de: " + aumento);
+            System.out.println("Seu salario apos o aumento será de: " + salarioAumento);
+        } else if (salario >= 1281 && salario <= 1700) {
+            double aumento = (salario * 15) / 100;
+            double salarioAumento = salario + aumento;
+            System.out.println("Salario antes do reajuste: " + salario);
+            System.out.println("Foi aplicado 15% de aumento.");
+            System.out.println("O valor do aumento foi de: " + aumento);
+            System.out.println("Seu salario apos o aumento será de: " + salarioAumento);
+        } else if (salario >= 1701 && salario <= 2500) {
+            double aumento = (salario * 10) / 100;
+            double salarioAumento = salario + aumento;
+            System.out.println("Salario antes do reajuste: " + salario);
+            System.out.println("Foi aplicado 10% de aumento.");
+            System.out.println("O valor do aumento foi de: " + aumento);
+            System.out.println("Seu salario apos o aumento será de: " + salarioAumento);
+        } else {
+            double aumento = (salario * 5) / 100;
+            double salarioAumento = salario + aumento;
+            System.out.println("Salario antes do reajuste: " + salario);
+            System.out.println("Foi aplicado 5% de aumento.");
+            System.out.println("O valor do aumento foi de: " + aumento);
+            System.out.println("Seu salario apos o aumento será de: " + salarioAumento);
+        }
+    }
+
+    public void Exercicio12() {
+
+        System.out.println("Informe o quanto recebe por hora: ");
+        double valorHora = sc.nextDouble();
+
+        System.out.println("Informe quantas horas trabalhou no mês: ");
+        double horasTrabalhadas = sc.nextDouble();
+
+        double salario = valorHora * horasTrabalhadas;
+        double sindicato = (salario * 3) / 100;
+        double inss = (salario * 10) / 100;
+        double fgts = (salario * 11) / 100;
+
+        if (salario <= 900) {
+            System.out.println("Segue abaixo seu folha de pagamento: ");
+            System.out.println("Salario bruto: R$ " + salario);
+            System.out.println("Contribuição Sindical (3%): " + sindicato);
+            System.out.println("IR: ISENTO.");
+            System.out.println("INSS (10%): " + inss);
+            System.out.println("FGTS (11%): " + fgts);
+            double descontos = sindicato + inss;
+            System.out.println("Total de descontos: " + descontos);
+            double salarioLiquido = salario - sindicato - inss;
+            System.out.println("Salario Liquido: R$ " + salarioLiquido);
+
+        } else if (salario >= 901 && salario <= 1500) {
+            double ir = (salario * 5) / 100;
+            double descontos = sindicato + inss + ir;
+            double salarioLiquido = salario - descontos;
+            System.out.println("Segue abaixo seu folha de pagamento: ");
+            System.out.println("Salario bruto: R$ " + salario);
+            System.out.println("Contribuição Sindical (3%): " + sindicato);
+            System.out.println("IR (5%): " + ir);
+            System.out.println("INSS (10%): " + inss);
+            System.out.println("FGTS (11%): " + fgts);
+            System.out.println("Total de descontos: " + descontos);
+            System.out.println("Salario Liquido: R$ " + salarioLiquido);
+
+        } else if (salario >= 1501 && salario <= 2500) {
+            double ir = (salario * 10) / 100;
+            double descontos = sindicato + inss + ir;
+            double salarioLiquido = salario - descontos;
+            System.out.println("Segue abaixo seu folha de pagamento: ");
+            System.out.println("Salario bruto: R$ " + salario);
+            System.out.println("Contribuição Sindical (3%): " + sindicato);
+            System.out.println("IR (10%): " + ir);
+            System.out.println("INSS (10%): " + inss);
+            System.out.println("FGTS (11%): " + fgts);
+            System.out.println("Total de descontos: " + descontos);
+            System.out.println("Salario Liquido: R$ " + salarioLiquido);
+
+        } else {
+            double ir = (salario * 20) / 100;
+            double descontos = sindicato + inss + ir;
+            double salarioLiquido = salario - descontos;
+            System.out.println("Segue abaixo seu folha de pagamento: ");
+            System.out.println("Salario bruto: R$ " + salario);
+            System.out.println("Contribuição Sindical (3%): " + sindicato);
+            System.out.println("IR (20%): " + ir);
+            System.out.println("INSS (10%): " + inss);
+            System.out.println("FGTS (11%): " + fgts);
+            System.out.println("Total de descontos: " + descontos);
+            System.out.println("Salario Liquido: R$ " + salarioLiquido);
+        }
+    }
 }
