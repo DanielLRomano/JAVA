@@ -25,9 +25,11 @@ public class exercicios {
         } else if (escolha == 2) {
             double sub = n1 - n2;
             System.out.println("O resultado da operação é: " + sub);
-        } else if (escolha == 3) {
+        } else if (escolha == 3 && n2 != 0) {
             double div = n1 / n2;
             System.out.println("O resultado da operação é: " + div);
+        } else if (escolha == 3 && n2 == 0) {
+            System.out.println("Essa operação não pode ser realizada.");
         } else if (escolha == 4) {
             double mult = n1 * n2;
             System.out.println("O resultado da operação é: " + mult);
@@ -38,17 +40,18 @@ public class exercicios {
 
     public void exercicio2() {
 
-        System.out.println(
-                "Informe seu numero de matricula (Mesmo numero da chamada, lembrando que são 20 alunos por sala então o numero será de 1 a 20)");
+        System.out.println("Informe seu numero de matricula:");
         int matricula = sc.nextInt();
 
-        if (matricula >= 1 && matricula <= 5) {
+        int resto = matricula % 4;
+
+        if (resto == 0) {
             System.out.println("Você está no Time do Chris!");
-        } else if (matricula >= 6 && matricula <= 10) {
+        } else if (resto == 1) {
             System.out.println("Você está no Time do Greg!");
-        } else if (matricula >= 11 && matricula <= 15) {
+        } else if (resto == 2) {
             System.out.println("Você está no Time do Caruso!");
-        } else if (matricula >= 16 && matricula <= 20) {
+        } else if (resto == 3) {
             System.out.println("Você está no Time do Jerome!");
         } else {
             System.out.println("Favor digitar um numero de 1 a 20");
