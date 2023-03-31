@@ -54,7 +54,6 @@ public class exercicios {
         } else if (resto == 3) {
             System.out.println("Você está no Time do Jerome!");
         } else {
-            System.out.println("Favor digitar um numero de 1 a 20");
         }
     }
 
