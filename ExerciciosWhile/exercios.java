@@ -1,6 +1,31 @@
 package Java.ExerciciosWhile;
 
+import java.util.Scanner;
+
 public class exercios {
+
+    Scanner sc = new Scanner(System.in);
+
+    public void exercicio3() {
+
+        double vetorNotas[] = new double[4];
+
+        // pegar as 4 notas do aluno 
+        for (int i = 0; i < vetorNotas.length; i++) {
+            System.out.println("Informe a " + (i + 1) + "ª nota do aluno");
+            vetorNotas[i] = sc.nextDouble();
+        }
+        // mostrar as notas e calcular a média
+        double media = 0;
+        for (int i = 0; i < vetorNotas.length; i++) {
+            System.out.println("Nota " + (i + 1) + " = " + vetorNotas[i]);
+            media += vetorNotas[i];
+        }
+        // dividir a media pelo nº de notas
+        media /= vetorNotas.length;
+        // imprimir a média 
+        System.out.println("A média do aluno é: " + media);
+    }
 
     public void exercicio4() {
 
@@ -91,7 +116,7 @@ public class exercios {
     }
 
     public void exercicio6() {
-        
+
     }
 
 }
