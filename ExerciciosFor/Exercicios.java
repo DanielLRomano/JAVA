@@ -152,4 +152,16 @@ public class Exercicios {
             System.out.println("Altura: " + altura[i]);
         }
     }
+
+    public void exercicio9() {
+        // ler um vetor de 10 elementos e calcular a soma quadrada
+        int vetor[] = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        // calcular a soma dos quadrados
+        int soma = 0; // acumular o valor
+        for (int i = 0; i < vetor.length; i++) {
+            soma += vetor[i] * vetor[i];
+        }
+        System.out.println("A soma do Quadrado dos elementos do vetor é " + soma);
+    }
 }
