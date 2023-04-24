@@ -84,29 +84,50 @@ public class Exercicios {
         for (int i = 0; i < numeros.length; i++) {
             if (numeros[i] % 2 == 0) {
                 nPar[contPar] = numeros[i];
-                contPar++; //atribui elementos do vetor numeros a posição diferente no vetor nPar
+                contPar++; // atribui elementos do vetor numeros a posição diferente no vetor nPar
             } else {
                 nImpar[contImpar] = numeros[i];
                 contImpar++;
             }
         }
-        //imprimir vetor de numeros 
+        // imprimir vetor de numeros
         for (int i = 0; i < numeros.length; i++) {
-            System.out.println("Vetor ["+i+"] = " + numeros[i]);
+            System.out.println("Vetor [" + i + "] = " + numeros[i]);
         }
         System.out.println("===============================");
-        //imprimir vetor de pares
+        // imprimir vetor de pares
         for (int i = 0; i < nPar.length; i++) {
-            System.out.println("Vetor Par ["+i+"] = " + nPar[i]);
+            System.out.println("Vetor Par [" + i + "] = " + nPar[i]);
         }
         System.out.println("===============================");
-        //imprimir vetor de impares
+        // imprimir vetor de impares
         for (int i = 0; i < nImpar.length; i++) {
-            System.out.println("Vetor Impar ["+i+"] = " + nImpar[i]);
+            System.out.println("Vetor Impar [" + i + "] = " + nImpar[i]);
         }
     }
 
-    public void exercicio6() {
-        
+    public void exercicio7() {
+        // vetor 5 nº, soma, multiplicação, numeros
+        double vetor[] = new double[5];
+
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.print("Vetor da posição[" + i + "] = ");
+            vetor[i] = sc.nextDouble();
+        }
+        // realizar as operações (soma, multiplicação)
+        double soma = 0; // incia com 0 neutro
+        double mult = 1; // inicia com 1 neutro
+        for (int i = 0; i < vetor.length; i++) {
+            soma += vetor[i];
+            mult *= vetor[i];
+        }
+
+        System.out.println("O valor da soma entre os elementos é: " + soma);
+        System.out.println("O valor da multiplicação entre os elementos é: " + mult);
+
+        // Imprimir todos os numeros
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.println("Vetor[" + i + "]= " + vetor[i]);
+        }
     }
 }
