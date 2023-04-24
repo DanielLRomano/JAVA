@@ -130,4 +130,26 @@ public class Exercicios {
             System.out.println("Vetor[" + i + "]= " + vetor[i]);
         }
     }
+
+    public void exercicio8() {
+        // ler idade e altura de 5 pessoas e imprimir na ordem inversa
+        // criar os vetores para receber as informações
+        int idade[] = new int[5];
+        double altura[] = new double[5];
+
+        // preencher os vetores
+        for (int i = 0; i < idade.length; i++) {
+            System.out.print("Informe a Idade da pessoa " + (i + 1) + " : ");
+            idade[i] = sc.nextInt();
+            System.out.print("Informe a Altura da pessoa " + (i + 1) + " : ");
+            altura[i] = sc.nextDouble();
+        }
+
+        // Iprimir na order inversa 4 -> 0
+        for (int i = 4; i >= 0; i--) {
+            System.out.println("Informações da Pessoa " + (i + 1));
+            System.out.println("Idade: " + idade[i]);
+            System.out.println("Altura: " + altura[i]);
+        }
+    }
 }
