@@ -1,4 +1,4 @@
-package Java.VetoresArray;
+package VetoresArray;
 
 public class App {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package Java.EstruturaDecisaoSwitch;
+package EstruturaDecisaoSwitch;
 
 import java.util.Scanner;
 

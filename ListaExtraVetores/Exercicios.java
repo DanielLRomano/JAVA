@@ -1,4 +1,4 @@
-package Java.ListaExtraVetores;
+package ListaExtraVetores;
 
 import java.util.Scanner;
 

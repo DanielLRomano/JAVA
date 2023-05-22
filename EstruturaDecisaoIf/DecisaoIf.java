@@ -1,4 +1,4 @@
-package Java.EstruturaDecisaoIf;
+package EstruturaDecisaoIf;
 
 import java.util.Scanner;
 

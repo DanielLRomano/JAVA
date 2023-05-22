@@ -1,4 +1,4 @@
-package Java.AtividadeGrupo;
+package AtividadeGrupo;
 
 public class app {
     public static void main(String[] args) {

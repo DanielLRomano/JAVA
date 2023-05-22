@@ -1,4 +1,4 @@
-package Java.ExercicioemDupla;
+package ExercicioemDupla;
 
 import java.util.Scanner;
 

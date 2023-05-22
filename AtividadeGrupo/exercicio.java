@@ -1,4 +1,4 @@
-package Java.AtividadeGrupo;
+package AtividadeGrupo;
 
 import java.util.Scanner;
 

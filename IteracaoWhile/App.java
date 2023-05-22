@@ -1,4 +1,4 @@
-package Java.IteracaoWhile;
+package IteracaoWhile;
 
 public class App {
     public static void main(String[] args) {

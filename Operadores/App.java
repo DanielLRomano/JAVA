@@ -1,4 +1,4 @@
-package Java.Operadores;
+package Operadores;
 
 /**
  * App

@@ -1,4 +1,4 @@
-package Java.IteracaoWhile;
+package IteracaoWhile;
 
 import java.util.Scanner;
 

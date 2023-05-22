@@ -1,4 +1,4 @@
-package Java.ExerciciosWhile;
+package ExerciciosWhile;
 
 public class app {
     public static void main(String[] args) {
