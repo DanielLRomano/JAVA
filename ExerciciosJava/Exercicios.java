@@ -78,15 +78,14 @@ public class Exercicios {
 
     public void exercicio3() {
 
-        int nVetor = rd.nextInt(900) + 100;
-        int vetor[] = new int[nVetor];
+        int vetor[] = new int[rd.nextInt(101,1001)];
 
         for (int i = 0; i < vetor.length; i++) {
             vetor[i] = rd.nextInt(2, 101);
         }
 
         for (int i = 0; i < vetor.length; i++) {
-            int resto = i % 2;
+            int resto = vetor[i] % 2;
             if (resto == 0) {
                 System.out.println("Os numeros pares do vetor são " + vetor[i]);
             }
@@ -94,7 +93,7 @@ public class Exercicios {
         System.out.println("==============================================================");
 
         for (int i = 0; i < vetor.length; i++) {
-            int resto = i % 2;
+            int resto = vetor[i] % 2;
             if (resto == 1) {
                 System.out.println("Os numeros impares do vetor são " + vetor[i]);
             }
