@@ -15,6 +15,11 @@ public class Agenda {
         this.idade = idade;
         this.altura = altura;
     }
+    
+
+    public Agenda() {
+    }
+
 
     public Scanner getSc() {
         return sc;
