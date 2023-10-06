@@ -19,13 +19,14 @@ public class TodoList extends JFrame {
     private JComboBox<String> filterComboBox;
     private JButton clearCompletedButton;
     private List<Task> tasks;
+    private JButton clearAll;
 
     // construtor
     public TodoList() {
         // Configuração da janela principal
         super("To-Do List App");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(500, 150, 400, 400);
+        this.setBounds(500, 100, 600, 600);
 
         // Inicializa o painel principal
         mainPanel = new JPanel();
@@ -41,6 +42,7 @@ public class TodoList extends JFrame {
         addButton = new JButton("Adicionar");
         deleteButton = new JButton("Excluir");
         markDoneButton = new JButton("Concluir");
+        clearAll = new JButton("Limpar Tarefas");
         filterComboBox = new JComboBox<>(new String[] { "Todas", "Ativas", "Concluídas" });
         clearCompletedButton = new JButton("Limpar Concluídas");
 
@@ -55,6 +57,7 @@ public class TodoList extends JFrame {
         buttonPanel.add(markDoneButton);
         buttonPanel.add(filterComboBox);
         buttonPanel.add(clearCompletedButton);
+        buttonPanel.add(clearAll);
 
         // Adiciona os componentes ao painel principal
         mainPanel.add(inputPanel, BorderLayout.NORTH);
@@ -71,11 +74,21 @@ public class TodoList extends JFrame {
         });
 
         deleteButton.addActionListener(e -> {
-            deleteTask();
+            if (taskList.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione uma tarefa para excluir", "Nenhuma Tarefa Selecionada",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                deleteTask();
+            }
         });
 
         markDoneButton.addActionListener(e -> {
-            markTaskDone();
+            if (taskList.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione uma tarefa para concluir", "Nenhuma Tarefa Selecionada",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                markTaskDone();
+            }
         });
         filterComboBox.addActionListener(e -> {
             filterTasks();
@@ -89,18 +102,13 @@ public class TodoList extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     // Verifica se a tecla Enter foi pressionada
-                    if (!tasks.isEmpty()) {
-                        // Verifica se há tarefas na lista
-                        Task ultimaTask = tasks.get(tasks.size() - 1); // Obtém a última tarefa
-                        String ultimaTaskDescription = ultimaTask.getDescription();
-
-                        // Exibe a última tarefa adicionada em um JOptionPane
-                        JOptionPane.showMessageDialog(TodoList.this,
-                                "Última tarefa adicionada:\n" + ultimaTaskDescription, "Última Tarefa Adicionada",
-                                JOptionPane.INFORMATION_MESSAGE);
-                    }
+                    addTask();
                 }
             }
+        });
+
+        clearAll.addActionListener(e -> {
+            clearTasks();
         });
     }
 
@@ -113,6 +121,9 @@ public class TodoList extends JFrame {
             tasks.add(newTask);
             updateTaskList();
             taskInputField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Digite uma Tarefa", "Nenhuma Tarefa Digitada",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -163,6 +174,17 @@ public class TodoList extends JFrame {
         }
         tasks.removeAll(completedTasks);
         updateTaskList();
+    }
+
+    private void clearTasks() {
+        // Limpa todas as tasks da lista
+        int escolha = JOptionPane.showConfirmDialog(this, "Tem certeza de que deseja excluir a lista tarefas?",
+                "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (escolha == JOptionPane.YES_OPTION) {
+            tasks.clear();
+            listModel.clear();
+        }
+
     }
 
     private void updateTaskList() {
