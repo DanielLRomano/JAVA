@@ -9,22 +9,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroUsuarios extends JFrame {
-
+public class CadastroUsuarios extends JPanel{
+    // set d frame
     private JTextField inputNome;
     private JTextField inputIdade;
     private DefaultTableModel tableModel;
     private JTable table;
+
     private List<Usuario> usuarios = new ArrayList<>();
     private int linhaSelecionada = -1;
 
     public CadastroUsuarios() {
-
-        // set do frame
-        setTitle("Cadastro de Usuários");
-        setSize(600, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         // modelagem e criação da tabela
         tableModel = new DefaultTableModel();
@@ -41,9 +36,9 @@ public class CadastroUsuarios extends JFrame {
         JButton apagarButton = new JButton("Apagar");
         JButton apagarTodosButton = new JButton("Apagar Todos");
         JButton salvarButton = new JButton("Salvar");
-
-        // add os componentes
         JPanel inputPanel = new JPanel();
+
+        // adicionar componente ao painel
         inputPanel.add(new JLabel("Nome:"));
         inputPanel.add(inputNome);
         inputPanel.add(new JLabel("Idade:"));
@@ -61,10 +56,11 @@ public class CadastroUsuarios extends JFrame {
 
         File arquivo = new File("dados.txt");
         if (arquivo.exists()) {
-            usuarios = Serializacao.deserializar("dados.txt");
+            usuarios = Serializacao.deserializar1("dados.txt");
             atualizarTabela();
         }
 
+        // métodos
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -72,13 +68,11 @@ public class CadastroUsuarios extends JFrame {
                 if (linhaSelecionada != -1) {
                     inputNome.setText((String) table.getValueAt(linhaSelecionada, 0));
                     inputIdade.setText(table.getValueAt(linhaSelecionada, 1).toString());
-
                 }
             }
         });
-
         OperacoesUsuarios operacoes = new OperacoesUsuarios(usuarios, tableModel, table);
-
+        
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,28 +81,25 @@ public class CadastroUsuarios extends JFrame {
                 inputIdade.setText("");
             }
         });
-
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                operacoes.atualizarUsuario(linhaSelecionada, inputNome.getText(), inputIdade.getText());
+                operacoes.atualizarUsuario(linhaSelecionada, inputNome.getText(),
+                        inputIdade.getText());
             }
         });
-
         apagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 operacoes.apagarUsuario(linhaSelecionada);
             }
         });
-
         apagarTodosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 operacoes.apagarTodosUsuarios();
             }
         });
-
         salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,10 +113,5 @@ public class CadastroUsuarios extends JFrame {
         for (Usuario usuario : usuarios) {
             tableModel.addRow(new Object[] { usuario.getNome(), usuario.getIdade() });
         }
-    }
-
-    public void run() {
-        pack();
-        setVisible(true);
     }
 }

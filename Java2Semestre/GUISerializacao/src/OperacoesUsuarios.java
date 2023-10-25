@@ -1,9 +1,9 @@
 import java.util.List;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class OperacoesUsuarios {
-
     private List<Usuario> usuarios;
     private DefaultTableModel tableModel;
     private JTable table;
@@ -43,7 +43,7 @@ public class OperacoesUsuarios {
     }
 
     public void salvarUsuarios() {
-        Serializacao.serializar("dados.txt", usuarios);
+        Serializacao.serializar1("dados.txt", usuarios);
     }
 
     private void atualizarTabela() {

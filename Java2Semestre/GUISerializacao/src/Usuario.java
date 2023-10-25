@@ -5,11 +5,13 @@ public class Usuario implements Serializable {
     String nome;
     int idade;
 
-    // métodos
+    // construtor
     public Usuario(String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
     }
+
+    // métodos
 
     public String getNome() {
         return nome;
@@ -26,6 +28,5 @@ public class Usuario implements Serializable {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-    
-    
+
 }
