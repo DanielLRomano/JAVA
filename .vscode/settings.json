@@ -5,6 +5,8 @@
     ],
     "java.project.sourcePaths": [
         "Java2Semestre/JDBCTeste/src",
-        "Java2Semestre/JDBCMavenTeste/src/main/java/app"
-    ]
+        "Java2Semestre/JDBCMavenTeste/src/main/java/app",
+        "Java2Semestre/ProjetoLojaCarros/src/main/java/app"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

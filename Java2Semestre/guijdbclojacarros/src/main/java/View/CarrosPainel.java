@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Connection.CarrosDAO;
+import Controller.CarrosControl;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -79,6 +80,22 @@ public class CarrosPainel extends JPanel {
                     carValorField.setText((String) table.getValueAt(linhaSelecionada, 4));
                 }
             }
+        });
+
+        CarrosControl carro1 = new CarrosControl(carros, tableModel, table);
+
+        cadastrar.addActionListener(e -> {
+            carro1.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
+                    carPlacaField.getText(), carValorField.getText());
+        });
+
+        apagar.addActionListener(e -> {
+            carro1.apagar(carPlacaField.getText());
+        });
+        
+        editar.addActionListener(e -> {
+            carro1.atualizar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
+                    carPlacaField.getText(), carValorField.getText());
         });
     }
 
