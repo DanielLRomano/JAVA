@@ -69,9 +69,6 @@ public class JanelaCarros extends JPanel {
         editar.setBackground(Color.white);
         botoes.add(apagar = new JButton("Apagar"));
         apagar.setBackground(Color.white);
-       
-
-        
 
         // tabela de carros
         JScrollPane jSPane = new JScrollPane();
@@ -82,7 +79,7 @@ public class JanelaCarros extends JPanel {
         jSPane.setViewportView(table);
 
         // Cria o banco de dados caso não tenha sido criado
- add(botoes);
+        add(botoes);
         new CarrosDAO().criaTabela();
 
         // incluindo elementos do banco na criação do painel
@@ -106,8 +103,6 @@ public class JanelaCarros extends JPanel {
         // banco de dados
         CarrosControl operacoes = new CarrosControl(carros, tableModel, table);
 
-
-
         // Configura a ação do botão "cadastrar" para adicionar um novo registro no
         // banco de dados
 
@@ -120,21 +115,21 @@ public class JanelaCarros extends JPanel {
                 } else {
                     if (!carAnoField.getText().matches("[0-9]+")) {
                         JOptionPane.showMessageDialog(null, "O campo 'Ano' deve conter apenas números.");
-                    } else if(!carValorField.getText().matches("[0-9]+")){
+                    } else if (!carValorField.getText().matches("[0-9]+")) {
                         JOptionPane.showMessageDialog(null, "O campo 'Valor' deve conter apenas números.");
-                    } else{
+                    } else {
                         // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
-                    // entrada
-                    operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
-                            carPlacaField.getText(), carValorField.getText());
-                    // Limpa os campos de entrada após a operação de cadastro
-                    carMarcaField.setText("");
-                    carModeloField.setText("");
-                    carAnoField.setText("");
-                    carPlacaField.setText("");
-                    carValorField.setText("");
+                        // entrada
+                        operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
+                                carPlacaField.getText(), carValorField.getText());
+                        // Limpa os campos de entrada após a operação de cadastro
+                        carMarcaField.setText("");
+                        carModeloField.setText("");
+                        carAnoField.setText("");
+                        carPlacaField.setText("");
+                        carValorField.setText("");
                     }
-                    
+
                 }
             }
         });
@@ -145,9 +140,9 @@ public class JanelaCarros extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (carPlacaField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
-                } else{
+                } else {
                     operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
-                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
+                            carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
 
                     // Limpa os campos de entrada após a operação de atualização
                     carMarcaField.setText("");
@@ -157,7 +152,7 @@ public class JanelaCarros extends JPanel {
                     carValorField.setText("");
                     JOptionPane.showMessageDialog(null, "Edição realizada com Sucesso!");
                 }
-                
+
             }
         });
 
@@ -167,25 +162,26 @@ public class JanelaCarros extends JPanel {
                 if (carPlacaField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um carro para apagar.");
                 } else {
-                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
+                            "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (resposta == JOptionPane.YES_OPTION) {
-                    // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
-                    // "placa"
-                    operacoes.apagar(carPlacaField.getText());
-                    JOptionPane.showMessageDialog(null, "O Carro " + carModeloField.getText() + " de placa "
-                            + carPlacaField.getText() + " foi deletado!");
+                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
+                        // "placa"
+                        operacoes.apagar(carPlacaField.getText());
+                        JOptionPane.showMessageDialog(null, "O Carro " + carModeloField.getText() + " de placa "
+                                + carPlacaField.getText() + " foi deletado!");
 
-                    // Limpa os campos de entrada após a operação de exclusão
-                    carMarcaField.setText("");
-                    carModeloField.setText("");
-                    carAnoField.setText("");
-                    carPlacaField.setText("");
-                    carValorField.setText("");
-                } else{
-                    JOptionPane.showMessageDialog(null, "O carro não foi deletado!");
+                        // Limpa os campos de entrada após a operação de exclusão
+                        carMarcaField.setText("");
+                        carModeloField.setText("");
+                        carAnoField.setText("");
+                        carPlacaField.setText("");
+                        carValorField.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O carro não foi deletado!");
+                    }
                 }
             }
-        }
         });
 
     }
