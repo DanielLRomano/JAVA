@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 
-
 import Controller.ClientesControl;
 import Model.Clientes;
 
@@ -51,43 +50,35 @@ public class JanelaClientes extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         frame1.setLayout(new BorderLayout());
 
+        // criar os componentes
+        inputCpf = new JTextField(20);
+
+        inputNome = new JTextField(20);
+
+        inputTelefone = new JTextField(20);
+
+        inputCidade = new JTextField(20);
+
+        // criar os componentes - labels
+        labelCpf = new JLabel("CPF");
+
+        labelNome = new JLabel("Nome");
+
+        labelTelefone = new JLabel("Telefone");
+
+        labelCidade = new JLabel("Cidade");
+
         // construir a tabela
         tableModel = new DefaultTableModel();
         tableModel.addColumn("CPF");
         tableModel.addColumn("Nome");
         tableModel.addColumn("Telefone");
         tableModel.addColumn("Cidade");
-    
+
         table = new JTable(tableModel);
         table.setBackground(Color.white);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setViewportView(table);
-
-        // criar os componentes
-        inputCpf = new JTextField(20);
-       
-
-        inputNome = new JTextField(20);
-        
-
-        inputTelefone = new JTextField(20);
-        
-
-        inputCidade = new JTextField(20);
-        
-
-        // criar os componentes - labels
-        labelCpf = new JLabel("CPF");
-       
-
-        labelNome = new JLabel("Nome");
-       
-
-        labelTelefone = new JLabel("Telefone");
-       
-
-        labelCidade = new JLabel("Cidade");
-        
 
         // botões
         cadastrarButton = new JButton("Cadastrar");
@@ -100,7 +91,7 @@ public class JanelaClientes extends JPanel {
         editarButton.setBackground(Color.white);
 
         // adicionar os componentes
-       
+
         inputFrame.add(labelNome);
         inputFrame.add(inputNome);
         inputFrame.add(labelCpf);
@@ -109,7 +100,6 @@ public class JanelaClientes extends JPanel {
         inputFrame.add(inputCidade);
         inputFrame.add(labelTelefone);
         inputFrame.add(inputTelefone);
-       
 
         botoes.add(cadastrarButton);
         botoes.add(apagarButton);
@@ -149,8 +139,8 @@ public class JanelaClientes extends JPanel {
                 } else {
                     if (!validarFormatoCPF(inputCpf.getText())) {
                         JOptionPane.showMessageDialog(null,
-                        "CPF inválido! O CPF deve conter apenas números e ter 11 dígitos.");
-                    } else if (!inputTelefone.getText().matches("[0-9]+") || inputTelefone.getText().length() < 11 ) {
+                                "CPF inválido! O CPF deve conter apenas números e ter 11 dígitos.");
+                    } else if (!inputTelefone.getText().matches("[0-9]+") || inputTelefone.getText().length() < 11) {
                         JOptionPane.showMessageDialog(null, "O campo 'Telefone' deve conter apenas números.");
                         JOptionPane.showMessageDialog(null, "Adicione  no seguinte formato 19999999999.");
                     } else if (!inputNome.getText().matches("[a-zA-ZÀ-ú\\s]+")) {
