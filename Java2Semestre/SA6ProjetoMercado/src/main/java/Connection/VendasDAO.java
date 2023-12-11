@@ -11,7 +11,6 @@ import java.util.List;
 import Model.ClientesVIP;
 import Model.Vendas;
 
-
 public class VendasDAO {
 
     // atributos
@@ -67,17 +66,17 @@ public class VendasDAO {
         return vendas; // Retorna a lista de carros recuperados do banco de dados
     }
 
-    // Cadastrar Carro no banco
+    // Cadastrar Venda no banco
     public void cadastrar(String data, String cliente, String quantidade, String codBarras) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela
-        String sql = "INSERT INTO vendas_mercado (cliente, data, codBarras, quantidade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO vendas_mercado (data, cliente, quantidade, produto) VALUES (?, ?, ?, ?)";
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, cliente);
-            stmt.setString(2, data);
-            stmt.setString(3, codBarras);
-            stmt.setString(4, quantidade);
+            stmt.setString(1, data);
+            stmt.setString(2, cliente);
+            stmt.setString(3, quantidade);
+            stmt.setString(4, codBarras);
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
         } catch (SQLException e) {
@@ -90,18 +89,16 @@ public class VendasDAO {
     // Atualizar dados no banco
     public void atualizar(String data, String cliente, String quantidade, String codBarras) {
         PreparedStatement stmt = null;
-        // Define a instrução SQL parametrizada para atualizar dados pela placa
-        String sql = "UPDATE vendas_mercado SET data = ?, cliente = ?, quantidade = ? WHERE codBarras = ?";
+        // Define a instrução SQL parametrizada para atualizar dados pela chave primária
+        String sql = "UPDATE vendas_mercado SET data = ?, cliente = ?, quantidade = ? WHERE produto = ?";
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, data);
             stmt.setString(2, cliente);
             stmt.setString(3, quantidade);
-            // placa é chave primaria não pode ser alterada.
             stmt.setString(4, codBarras);
 
             stmt.executeUpdate();
-
             System.out.println("Dados atualizados com sucesso");
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar dados no banco de dados.", e);
