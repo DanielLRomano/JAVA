@@ -160,109 +160,138 @@ public class JanelaVendas extends JPanel {
             }
         });
 
-        // VendasControl operacoes = new VendasControl(vendas, tableModel, table);
+        VendasControl operacoes = new VendasControl(vendas, tableModel, table);
 
-        // cadastrarButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         String data = inputData.getText();
-        //         String valor = inputQuantidade.getText();
-        //         String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionado
-        //                                                                                  // no ComboBox
-        //         String carroSelecionado = (String) produtosComboBox.getSelectedItem(); // pegar o carro selecionado no
-        //                                                                              // ComboBox
+        cadastrarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String data = inputData.getText();
+                String quantidade = inputQuantidade.getText();
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem();
+                String produtoSelecionado = (String) produtosComboBox.getSelectedItem();
 
-        //         if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente")
-        //                 || carroSelecionado.equals("Selecione um Carro")) {
-        //             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
-        //         } else {
-        //             if (!valor.matches("[0-9]+")) {
-        //                 JOptionPane.showMessageDialog(null, "O campo 'Valor' deve conter apenas números.");
-        //             } else {
-        //                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        //                 dateFormat.setLenient(false);
+                if (data.isEmpty() || quantidade.isEmpty() || clienteSelecionado.equals("Selecione um cliente")
+                        || produtoSelecionado.equals("Selecione um produto")) {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+                } else {
+                    if (!quantidade.matches("[0-9]+")) {
+                        JOptionPane.showMessageDialog(null, "O campo 'quantidade' deve conter apenas números.");
+                    } else {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        dateFormat.setLenient(false);
+                        try {
+                            // Tentar fazer o parse da data para verificar se é uma data válida
+                            Date parsedDate = dateFormat.parse(data);
+                            if (!data.equals(dateFormat.format(parsedDate))) {
+                                throw new ParseException("Formato inválido", 0);
+                            }
 
-        //                 try {
-        //                     // Tentar fazer o parse da data para verificar se é uma data válida
-        //                     Date parsedDate = dateFormat.parse(data);
-        //                     if (!data.equals(dateFormat.format(parsedDate))) {
-        //                         throw new ParseException("Formato inválido", 0);
-        //                     }
+                            String cliente = clienteSelecionado.split(" ")[0];
+                            operacoes.cadastrar(data, cliente, quantidade, produtoSelecionado);
+                            inputData.setText("");
+                            inputQuantidade.setText("");
+                            clientesComboBox.setSelectedIndex(0);
+                            produtosComboBox.setSelectedIndex(0);
+                            new EstoqueDAO().apagar(produtoSelecionado);
+                            JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
+                        } catch (ParseException ex) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Formato de data inválido. Utilize o formato dd/MM/yyyy.");
+                        }
+                    }
+                }
+            }
+        });
+        editarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionadno
+                                                                                         // ComboBox
+                String produtoSelecionado = (String) produtosComboBox.getSelectedItem(); // pegar o carro selecionado no
+                                                                                         // ComboBox
+                if (inputProduto.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Selecione algo para editar");
+                } else {
+                    operacoes.atualizar(inputData.getText(), clienteSelecionado,
+                            inputQuantidade.getText(),
+                            produtoSelecionado);
 
-        //                     String cliente = clienteSelecionado.split(" ")[0];
-        //                     operacoes.cadastrar(data, cliente, valor, carroSelecionado);
-        //                     inputData.setText("");
-        //                     inputQuantidade.setText("");
-        //                     clientesComboBox.setSelectedIndex(0);
-        //                     produtosComboBox.setSelectedIndex(0);
-        //                     new CarrosDAO().apagar(carroSelecionado);
-        //                     JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
-        //                 } catch (ParseException ex) {
-        //                     JOptionPane.showMessageDialog(null,
-        //                             "Formato de data inválido. Utilize o formato dd/MM/yyyy.");
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
-        // editarButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad
-        //                                                                                  // no ComboBox
-        //         String carroSelecionado = (String) produtosComboBox.getSelectedItem(); // pegar o carro selecionado no
-        //                                                                              // ComboBox
-        //         if (inputProduto.getText().isEmpty()) {
-        //             JOptionPane.showMessageDialog(null, "Selecione algo para editar");
-        //         } else {
-        //             operacoes.atualizar(inputData.getText(), clienteSelecionado, inputQuantidade.getText(),
-        //                     carroSelecionado);
+                    // Limpa os campos de entrada após a operação de atualização
+                    inputData.setText("");
+                    inputQuantidade.setText("");
+                    clientesComboBox.setSelectedIndex(0);
+                    produtosComboBox.setSelectedIndex(0);
+                    JOptionPane.showMessageDialog(null, "Editado com Sucesso!");
+                }
 
-        //             // Limpa os campos de entrada após a operação de atualização
-        //             inputData.setText("");
-        //             inputQuantidade.setText("");
-        //             clientesComboBox.setSelectedIndex(0);
-        //             produtosComboBox.setSelectedIndex(0);
-        //             JOptionPane.showMessageDialog(null, "Editado com Sucesso!");
-        //         }
+            }
+        });
 
-        //     }
-        // });
+        // Configura a ação do botão "apagar" para excluir um registro no banco de dados
+        apagarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String produtoSelecionado = (String) produtosComboBox.getSelectedItem(); // pegar o carro selecionado no
+                                                                                         // ComboBox
+                if (inputProduto.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
+                } else {
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
+                            "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
+                        // "placa"
+                        operacoes.apagar(inputProduto.getText());
+                        JOptionPane.showMessageDialog(null, "A venda deletada com Sucesso!");
 
-        // // Configura a ação do botão "apagar" para excluir um registro no banco de dados
-        // apagarButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         String carroSelecionado = (String) produtosComboBox.getSelectedItem(); // pegar o carro selecionado no
-        //                                                                              // ComboBox
-        //         if (inputProduto.getText().isEmpty()) {
-        //             JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
-        //         } else {
-        //             int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
-        //                     "Confirmação", JOptionPane.YES_NO_OPTION);
-        //             if (resposta == JOptionPane.YES_OPTION) {
-        //                 // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
-        //                 // "placa"
-        //                 operacoes.apagar(inputProduto.getText());
-        //                 JOptionPane.showMessageDialog(null, "A venda deletada com Sucesso!");
+                        // Limpa os campos de entrada após a operação de exclusão
+                        inputData.setText("");
+                        inputQuantidade.setText("");
+                        clientesComboBox.setSelectedIndex(0);
+                        produtosComboBox.setSelectedIndex(0);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "A venda foi Cancelada!");
+                    }
+                }
+            }
+        });
 
-        //                 // Limpa os campos de entrada após a operação de exclusão
-        //                 inputData.setText("");
-        //                 inputQuantidade.setText("");
-        //                 clientesComboBox.setSelectedIndex(0);
-        //                 produtosComboBox.setSelectedIndex(0);
-        //             } else {
-        //                 JOptionPane.showMessageDialog(null, "A venda foi Cancelada!");
-        //             }
-        //         }
-        //     }
-        // });
+        // atualizar as comboBox com os valores atuais
+        atualizarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                atualizarComboBoxClientes();
+                atualizarComboBoxProdutos();
+            }
+        });
 
-        // // atualizar as comboBox com os valores atuais
-        // atualizarButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         atualizarComboBoxClientes();
-        //         atualizarComboBoxCarros();
-        //     }
-        // });
+    }
 
+    // atualizar Tabela de Carros com o Banco de Dados
+    private void atualizarTabela() {
+        // atualizar tabela pelo banco de dados
+        tableModel.setRowCount(0);
+        vendas = new VendasDAO().listarTodos();
+        for (Vendas venda : vendas) {
+            tableModel.addRow(
+                    new Object[] { venda.getCpf(), venda.getData(), venda.getCodBarras(), venda.getQuantidade() });
+        }
+    }
+
+    // Método para atualizar ComboBox de Clientes
+    private void atualizarComboBoxClientes() {
+        clientesComboBox.removeAllItems();
+        clientesComboBox.addItem("Selecione um cliente");
+        clientes = new ClientesDAO().listarTodos();
+        for (ClientesVIP cliente : clientes) {
+            clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
+        }
+    }
+
+    // Método para atualizar ComboBox de Produtos
+    private void atualizarComboBoxProdutos() {
+        produtosComboBox.removeAllItems();
+        produtosComboBox.addItem("Selecione um Produto");
+        estoques = new EstoqueDAO().listarTodos();
+        for (Estoque estoque : estoques) {
+            produtosComboBox.addItem(estoque.getCodBarras() + " " + estoque.getNomeProduto());
+        }
     }
 
 }
